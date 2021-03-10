@@ -19,53 +19,108 @@ sheet = client.open("friser2").sheet1
 #list_of_hashes = sheet.get_all_records()
 
 
-def registrar_now(compresor,dato,tipo):  #recibe del tipo (int,x,n) y lo registra en la tabla correspondiente
-    now = datetime.now()
-    current_hour = int(now.strftime("%H"))
-    columna=current_hour+2
-    sett=(compresor*12)-7
-    fila=sett+dato
-    sheet.update_cell(fila,columna,"hola")
-    print(fila,columna)
-
 def hora_absoluta():
     now = datetime.now()
     date_val = date(now.year, now.month, now.day)
     day_of_year = date_val.strftime('%j')
-    hour_of_year=int(day_of_year)*24
+    hour_of_year=int(day_of_year)*24+int(now.hour)
     return(hour_of_year)
 
-
+def minuto_absoluto():
+    return(int(hora_absoluta*60))
+    
+st="Null"
+dt="Null"
+ot="Null"
+it="Null"
+c1="Null"
+c2="Null"
+c3="Null"
+c4="Null"
 while True:
+
     os.system("reset")
     try:
         dataserial = serial.Serial('/dev/ttyUSB0', baudrate=500000, timeout=1)
         time.sleep(1)
-        elemento=dataserial.readline().split()
+        elementos=dataserial.readline().split()
     except:
         pass
 
     try:
         dataserial = serial.Serial('/dev/ttyUSB1', baudrate=500000, timeout=1)
         time.sleep(1)
-        elemento=dataserial.readline().split()
+        elementos=dataserial.readline().split()
     except:
         pass
-        
-    print(elemento)
+   
+   
+    for entrada in elementos:
+        if "t0f" in entrada:
+            entrada=entrada.replace("t0f","")
+            entrada=float(entrada)
+            st=entrada
+
+    for entrada in elementos:
+        if "t1f" in entrada:
+            entrada=entrada.replace("t1f","")
+            entrada=float(entrada)
+            dt=entrada
+
+    for entrada in elementos:
+        if "t2f" in entrada:
+            entrada=entrada.replace("t2f","")
+            entrada=float(entrada)
+            ot=entrada
+
+    for entrada in elementos:
+        if "t3f" in entrada:
+            entrada=entrada.replace("t3f","")
+            entrada=float(entrada)
+            it=entrada           
+            
+    for entrada in elementos:
+        if "t4f" in entrada:
+            entrada=entrada.replace("t4f","")
+            entrada=float(entrada)
+            c1=entrada
+            
+    for entrada in elementos:
+        if "t5f" in entrada:
+            entrada=entrada.replace("t5f","")
+            entrada=float(entrada)
+            c2=entrada            
+
+    for entrada in elementos:
+        if "t6f" in entrada:
+            entrada=entrada.replace("t6f","")
+            entrada=float(entrada)
+            c3=entrada              
+            
+    for entrada in elementos:
+        if "t7f" in entrada:
+            entrada=entrada.replace("t7f","")
+            entrada=float(entrada)
+            c4=entrada   
+
+    for entrada in elementos:
+        if "t8f" in entrada:
+            entrada=entrada.replace("t8f","")
+            entrada=float(entrada)
+            hhh=entrada   
+
+    for entrada in elementos:
+        if "t9f" in entrada:
+            entrada=entrada.replace("t9f","")
+            entrada=float(entrada)
+            hhh=entrada               
+                       
     now=datetime.now()
     if True: #int(now.minute)==00:
         fecha="{}-{}-{}".format(now.year,now.month,now.day)
         hora="{}:{}:{}".format(now.hour,now.minute,now.second)
-        st=0
-        dt=0
-        ot=0
-        it=0
-        c1=0
-        c2=0
-        c3=0
-        c4=0
-        
+
+        print(hora_absoluta())
         print("Registrando datos")
         
         sheet.update_cell(hora_absoluta()-1648,2 , fecha) #fila,columna
