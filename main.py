@@ -1,5 +1,6 @@
 import gspread
 import datetime 
+import os
 import time
 from datetime import datetime
 from datetime import date
@@ -47,7 +48,9 @@ while True:
         c2=0
         c3=0
         c4=0
+        os.system("clear")
         print("Registrando datos")
+        
         sheet.update_cell(hora_absoluta()-1648,2 , fecha) #fila,columna
         sheet.update_cell(hora_absoluta()-1648,3 , hora)
         sheet.update_cell(hora_absoluta()-1648,4 , st)
@@ -58,4 +61,5 @@ while True:
         sheet.update_cell(hora_absoluta()-1648,9 , c2)
         sheet.update_cell(hora_absoluta()-1648,10 , c3)
         sheet.update_cell(hora_absoluta()-1648,11, c4)
-        time.sleep(5)
+        print("Ultimo registro: {}-{}-{} a las {}:{}:{}".format(now.year,now.month,now.day,now.hour,now.minute,now.second))
+        time.sleep(20)
