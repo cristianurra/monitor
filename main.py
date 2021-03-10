@@ -38,6 +38,7 @@ while True:
     now=datetime.now()
     if True: #int(now.minute)==00:
         fecha="{}-{}-{}".format(now.year,now.month,now.day)
+        hora="{}:{}:{}".format(now.hour,now.minute,now.second)
         st=0
         dt=0
         ot=0
@@ -47,5 +48,14 @@ while True:
         c3=0
         c4=0
         print("Registrando datos")
-        sheet.update_cell(hora_absoluta()-1620,2 , fecha) #fila,columna
+        sheet.update_cell(hora_absoluta()-1648,2 , fecha) #fila,columna
+        sheet.update_cell(hora_absoluta()-1648,3 , hora)
+        sheet.update_cell(hora_absoluta()-1648,4 , st)
+        sheet.update_cell(hora_absoluta()-1648,5 , dt)
+        sheet.update_cell(hora_absoluta()-1648,6 , ot)
+        sheet.update_cell(hora_absoluta()-1648,7 , it)
+        sheet.update_cell(hora_absoluta()-1648,8 , c1)
+        sheet.update_cell(hora_absoluta()-1648,9 , c2)
+        sheet.update_cell(hora_absoluta()-1648,10 , c3)
+        sheet.update_cell(hora_absoluta()-1648,11, c4)
         time.sleep(5)
