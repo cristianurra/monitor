@@ -1,4 +1,5 @@
 import gspread
+import serial
 import datetime 
 import os
 import time
@@ -36,6 +37,22 @@ def hora_absoluta():
 
 
 while True:
+    os.system("reset")
+    try:
+        dataserial = serial.Serial('/dev/ttyUSB0', baudrate=500000, timeout=1)
+        time.sleep(1)
+        elemento=dataserial.readline().split()
+    except:
+        pass
+
+    try:
+        dataserial = serial.Serial('/dev/ttyUSB1', baudrate=500000, timeout=1)
+        time.sleep(1)
+        elemento=dataserial.readline().split()
+    except:
+        pass
+        
+    print(elemento)
     now=datetime.now()
     if True: #int(now.minute)==00:
         fecha="{}-{}-{}".format(now.year,now.month,now.day)
@@ -48,7 +65,7 @@ while True:
         c2=0
         c3=0
         c4=0
-        os.system("clear")
+        
         print("Registrando datos")
         
         sheet.update_cell(hora_absoluta()-1648,2 , fecha) #fila,columna
