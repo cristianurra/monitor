@@ -37,6 +37,15 @@ def hora_absoluta():
 while True:
     now=datetime.now()
     if True: #int(now.minute)==00:
+        fecha="{}-{}-{}".format(now.year,now.month,now.day)
+        st=0
+        dt=0
+        ot=0
+        it=0
+        c1=0
+        c2=0
+        c3=0
+        c4=0
         print("Registrando datos")
-        sheet.update_cell(hora_absoluta()-1620,2 , "aaa") #fila,columna
+        sheet.update_cell(hora_absoluta()-1620,2 , fecha) #fila,columna
         time.sleep(5)
